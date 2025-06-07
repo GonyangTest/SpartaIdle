@@ -13,14 +13,6 @@ MonoBehaviour:
   m_Name: UIPathConfig
   m_EditorClassIdentifier: Assembly-CSharp::UIPathConfig
   _uiPaths:
-  - _category: 1
-    _uiType: 2
-    _path: UI/WindowUI/ShopWindow
-    _isEnabled: 1
-  - _category: 0
-    _uiType: 0
-    _path: 
-    _isEnabled: 0
   - _category: 0
     _uiType: 0
     _path: UI/FixedUI/Main
