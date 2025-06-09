@@ -15,8 +15,10 @@ public class GameManager : Singleton<GameManager>
 
     UIManager _uiManager;
 
-    public void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         PlayerManager = PlayerManager.Instance;
         CurrencyManager = CurrencyManager.Instance;
         StageManager = StageManager.Instance;
