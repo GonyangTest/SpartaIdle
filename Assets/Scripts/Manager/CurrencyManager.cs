@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class CurrencyManager : Singleton<CurrencyManager>
 {
+    public event Action<int> OnGoldDataChanged;
+
+    public void Awake()
+    {
+        Gold = 100;
+    }
+
     public int Gold { get; private set; }
 
     public void AddGold(int amount)
@@ -15,5 +22,6 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public void SubtractGold(int amount)
     {
         Gold -= amount;
+        OnGoldDataChanged?.Invoke(Gold);
     }
 }

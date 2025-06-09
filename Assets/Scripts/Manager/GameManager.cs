@@ -34,14 +34,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            if (_uiManager.IsUIActive(UIType.Shop))
-            {
-                _uiManager.CloseUI(UIType.Shop);
-            }
-            else
-            {
-                _uiManager.OpenUI(UIType.Shop);
-            }
+
         }
     }
 

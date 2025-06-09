@@ -236,10 +236,10 @@ public class ItemDataEditor : EditorWindow
             EditorGUILayout.BeginHorizontal();
             
             // 아이콘
-            if (item.icon != null)
+            if (item.Icon != null)
             {
                 var iconRect = GUILayoutUtility.GetRect(32, 32, GUILayout.Width(32), GUILayout.Height(32));
-                EditorGUI.DrawPreviewTexture(iconRect, item.icon.texture);
+                EditorGUI.DrawPreviewTexture(iconRect, item.Icon.texture);
             }
             else
             {
@@ -306,7 +306,7 @@ public class ItemDataEditor : EditorWindow
         newItem.ItemName = _itemName;
         newItem.Type = _itemType;
         newItem.Rarity = _itemRarity;
-        newItem.icon = _itemIcon;
+        newItem.Icon = _itemIcon;
         newItem.Prefab = _itemPrefab;
         newItem.IsStackable = _isStackable;
         newItem.MaxStack = _maxStack;
@@ -337,7 +337,7 @@ public class ItemDataEditor : EditorWindow
         _selectedItem.ItemName = _itemName;
         _selectedItem.Type = _itemType;
         _selectedItem.Rarity = _itemRarity;
-        _selectedItem.icon = _itemIcon;
+        _selectedItem.Icon = _itemIcon;
         _selectedItem.Prefab = _itemPrefab;
         _selectedItem.IsStackable = _isStackable;
         _selectedItem.MaxStack = _maxStack;
@@ -358,7 +358,7 @@ public class ItemDataEditor : EditorWindow
         _itemName = item.ItemName;
         _itemType = item.Type;
         _itemRarity = item.Rarity;
-        _itemIcon = item.icon;
+        _itemIcon = item.Icon;
         _itemPrefab = item.Prefab;
         _isStackable = item.IsStackable;
         _maxStack = item.MaxStack;

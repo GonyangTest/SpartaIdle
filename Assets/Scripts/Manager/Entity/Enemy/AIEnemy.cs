@@ -98,17 +98,17 @@ public class AIEnemy : MonoBehaviour, IDamageable
 
     protected void OnDrawGizmos()
     {
-        if(stateMachine.IsChasing)
-        {
-            Gizmos.color = Color.red;
-        }
-        else{
-            Gizmos.color = Color.green;
-        }
-        Gizmos.DrawLine(transform.position, Target.position);
+        // if(stateMachine.IsChasing)
+        // {
+        //     Gizmos.color = Color.red;
+        // }
+        // else{
+        //     Gizmos.color = Color.green;
+        // }
+        // Gizmos.DrawLine(transform.position, Target.position);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1.0f);
+        // Gizmos.color = Color.red;
+        // Gizmos.DrawWireSphere(transform.position, 1.0f);
     }
 
     [ContextMenu("Test")]

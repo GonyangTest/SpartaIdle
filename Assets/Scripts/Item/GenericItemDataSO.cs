@@ -26,7 +26,7 @@ public class GenericItemDataSO : ScriptableObject
     public string ItemName;
     public ItemType Type;
     public ItemRarity Rarity;
-    public Sprite icon;
+    public Sprite Icon;
     public GameObject Prefab;
     public bool IsStackable;
     public int MaxStack;

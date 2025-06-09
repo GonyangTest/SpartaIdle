@@ -19,16 +19,24 @@ public class MainUI : BaseFixed
     [Header("Stage Info")]
     [SerializeField] private TextMeshProUGUI _stageText;
 
+    [Header("Shop Info")]
+    [SerializeField] private Button _shopButton;
+
+    [Header("Inventory Info")]
+    [SerializeField] private Button _inventoryButton;   
+
     private GameManager _gameManager;
     private StageManager _stageManager;
     private CurrencyManager _currencyManager;
     private PlayerManager _playerManager;
+    private UIManager _uiManager;
 
     public override void OnOpen(OpenParam param = null)
     {
         base.OnOpen(param);
 
         _gameManager = GameManager.Instance;
+        _uiManager = UIManager.Instance;
 
         _stageManager = _gameManager.StageManager;
         _currencyManager = _gameManager.CurrencyManager;
@@ -38,7 +46,7 @@ public class MainUI : BaseFixed
         if(_gameManager != null)
         {
             _gameManager.OnPlayerDataChanged += UpdatePlayerInfo;
-            _gameManager.OnGoldDataChanged += UpdateGold;
+            _currencyManager.OnGoldDataChanged += UpdateGold;
             _gameManager.OnStageDataChanged += UpdateStageInfo;
         }
 
@@ -58,7 +66,7 @@ public class MainUI : BaseFixed
         if (_gameManager != null)
         {
             _gameManager.OnPlayerDataChanged -= UpdatePlayerInfo;
-            _gameManager.OnGoldDataChanged -= UpdateGold;
+            _currencyManager.OnGoldDataChanged -= UpdateGold;
             _gameManager.OnStageDataChanged -= UpdateStageInfo;
         }
     }
@@ -66,7 +74,7 @@ public class MainUI : BaseFixed
     public void RefreshAllUI()
     {
         UpdatePlayerInfo();
-        UpdateGold();
+        UpdateGold(_currencyManager.Gold);
         UpdateStageInfo();
     }
 
@@ -97,7 +105,7 @@ public class MainUI : BaseFixed
             _stageText.text = $"Stage: {_stageManager.CurrentStage}";
     }
 
-    public void UpdateGold()
+    public void UpdateGold(int gold)
     {
         if(_currencyManager == null)
         {
@@ -105,6 +113,28 @@ public class MainUI : BaseFixed
         }
 
         if (_goldText != null)
-            _goldText.text = _currencyManager.Gold.ToString("N0");
+            _goldText.text = gold.ToString("N0");
+    }
+
+    public void OnClickShopButton()
+    {
+        _uiManager = UIManager.Instance;
+
+        if (_uiManager.IsUIActive(UIType.Shop))
+        {
+            _uiManager.CloseUI(UIType.Shop);
+        }
+        else
+        {
+            _uiManager.OpenUI(UIType.Shop);
+        }
+    }
+
+    public void OnClickInventoryButton()
+    {
+        // if (_uiManager.IsUIActive(UIType.Inventory))
+        // {
+        //     _uiManager.CloseUI(UIType.Inventory);
+        // }
     }
 }
