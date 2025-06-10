@@ -45,7 +45,7 @@ public class MainUI : BaseFixed
         // 게임 데이터 변화 이벤트 구독
         if(_gameManager != null)
         {
-            _gameManager.OnPlayerDataChanged += UpdatePlayerInfo;
+            _playerManager.OnPlayerInfoDataChanged += UpdatePlayerInfo;
             _currencyManager.OnGoldDataChanged += UpdateGold;
             _gameManager.OnStageDataChanged += UpdateStageInfo;
         }
@@ -65,7 +65,7 @@ public class MainUI : BaseFixed
         // 이벤트 구독 해제
         if (_gameManager != null)
         {
-            _gameManager.OnPlayerDataChanged -= UpdatePlayerInfo;
+            _playerManager.OnPlayerInfoDataChanged -= UpdatePlayerInfo;
             _currencyManager.OnGoldDataChanged -= UpdateGold;
             _gameManager.OnStageDataChanged -= UpdateStageInfo;
         }
@@ -73,24 +73,19 @@ public class MainUI : BaseFixed
 
     public void RefreshAllUI()
     {
-        UpdatePlayerInfo();
+        UpdatePlayerInfo(_playerManager.MaxExp, _playerManager.Exp, _playerManager.Level);
         UpdateGold(_currencyManager.Gold);
         UpdateStageInfo();
     }
 
-    private void UpdatePlayerInfo()
+    private void UpdatePlayerInfo(int maxExp, int exp, int level)
     {
-        if(_playerManager == null)
-        {
-            _playerManager = _gameManager.PlayerManager;
-        }
-
         if (_levelText != null)
-            _levelText.text = $"Lv {_playerManager.Level}";
+            _levelText.text = $"Lv {level}";
             
         if (_expBar != null)
         {
-            _expBar.fillAmount = (float)_playerManager.Exp / _playerManager.MaxExp;
+            _expBar.fillAmount = (float)exp / maxExp;
         }
     }
 

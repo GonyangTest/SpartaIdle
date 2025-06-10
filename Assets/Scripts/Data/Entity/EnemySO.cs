@@ -3,6 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class EnemyDropItemData
+{
+    [field:SerializeField] public GenericItemDataSO Item {get; private set;}
+    [field:SerializeField] public int DropRate {get; private set;}
+}
+
+
+[System.Serializable]
+public class EnemyRewardData
+{
+    [field:SerializeField] public int Gold {get; private set;} = 0;
+    [field:SerializeField] public int Exp {get; private set;} = 0;
+    [field:SerializeField] public List<EnemyDropItemData> DropItemDatas {get; private set;}
+}
+
+[System.Serializable]
 public class EnemyGroundData
 {
     [field:SerializeField][field:Range(0f, 25f)] public float BaseSpeed {get; private set;} = 5f;
@@ -39,4 +55,5 @@ public class EnemySO : EntitySO
     [field:SerializeField] public EnemyGroundData GroundData {get; private set;}
     [field:SerializeField] public EnemyAttackData AttackData {get; private set;}
     [field:SerializeField] public EnemyHitData HitData {get; private set;}
+    [field:SerializeField] public EnemyRewardData RewardData {get; private set;}
 }

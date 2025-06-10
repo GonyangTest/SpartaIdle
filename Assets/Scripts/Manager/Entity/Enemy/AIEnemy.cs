@@ -125,5 +125,27 @@ public class AIEnemy : MonoBehaviour, IDamageable
     public void Death()
     {
         stateMachine.ChangeState(stateMachine.DeadState);
+
+        if(Data.RewardData.DropItemDatas.Count > 0)
+        {
+            foreach(var itemData in Data.RewardData.DropItemDatas)
+            {
+                int random = Random.Range(0, 100);
+                if(random < itemData.DropRate)
+                {
+                    InventoryManager.Instance.AddItem(new ItemInstance(itemData.Item, 1));
+                }
+            }
+        }
+
+        if(Data.RewardData.Gold > 0)
+        {
+            CurrencyManager.Instance.AddGold(Data.RewardData.Gold);
+        }
+
+        if(Data.RewardData.Exp > 0)
+        {
+            PlayerManager.Instance.AddExp(Data.RewardData.Exp);
+        }   
     }
 }

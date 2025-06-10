@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerManager : Singleton<PlayerManager>
 {
     public AIPlayer Player;
+
+    public event Action<int, int, int> OnPlayerInfoDataChanged;
     
 
     public int Level { get; private set; }
@@ -29,6 +31,8 @@ public class PlayerManager : Singleton<PlayerManager>
             AddLevel();
             Exp = 0;
         }
+        
+        OnPlayerInfoDataChanged?.Invoke(MaxExp, Exp, Level);
     }
 
     public void AddLevel()
