@@ -25,8 +25,9 @@ public class EnemyComboAttackState : EnemyAttackState
         attackInfoData = stateMachine.enemy.Data.AttackData.GetAttackInfoData(comboIndex);
         stateMachine.enemy.Animator.SetInteger("Combo", comboIndex);
 
+        int damage = (int)(stateMachine.enemy.Data.StatData.BaseAttack * attackInfoData.DamageMultiplier);
         // 임시
-        PlayerManager.Instance.Player.TakeDamage(10);
+        PlayerManager.Instance.Player.TakeDamage(damage);
     }
 
     public override void Exit()

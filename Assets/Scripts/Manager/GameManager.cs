@@ -48,6 +48,12 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Game Over!");
     }
 
+    private void StageClear(int stage)
+    {
+        // StageManager.NextStage();
+        // _uiManager.OpenUI(UIType.StageClear, new OpenParam(stage));
+    }
+
     [ContextMenu("Test")]
     void Test()
     {

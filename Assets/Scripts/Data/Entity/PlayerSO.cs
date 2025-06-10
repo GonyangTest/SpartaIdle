@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public class PlayerGroundData
 {
@@ -26,6 +27,7 @@ public class PlayerAttackData
 [CreateAssetMenu(fileName = "Player", menuName = "ScriptableObject/Player")]
 public class PlayerSO : EntitySO
 {
+    [field:SerializeField] public StatData StatData {get; private set;}
     [field:SerializeField] public PlayerGroundData GroundData {get; private set;}
     [field:SerializeField] public PlayerAttackData AttackData {get; private set;}
 }

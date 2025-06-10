@@ -10,8 +10,6 @@ public class WeaponItemDataSO : GenericItemDataSO
     public int Damage;
     public int CriticalChance;
     public int CriticalDamage;
-    public int AttackSpeed;
-    public int AttackRange;
 
     public override void Use()
     {

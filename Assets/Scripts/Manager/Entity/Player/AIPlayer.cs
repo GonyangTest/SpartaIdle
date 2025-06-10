@@ -40,6 +40,7 @@ public class AIPlayer : MonoBehaviour, IDamageable
     {
         PlayerManager = GameManager.Instance.PlayerManager;
         PlayerManager.Player = this;
+        PlayerManager.OnTotalStatChanged(new BuffBonus());
 
         Health.Initialize(Data);
         CreateHealthBar();
@@ -107,12 +108,6 @@ public class AIPlayer : MonoBehaviour, IDamageable
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 1.0f);
-    }
-
-    [ContextMenu("Test")]
-    public void Test()
-    {
-        Health.TakeDamage(10);
     }
 
     public void TakeDamage(int damage)

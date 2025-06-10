@@ -18,8 +18,6 @@ MonoBehaviour:
     <MaxHealth>k__BackingField: 10
     <InvulnerabilityDuration>k__BackingField: 0
   <PlayerChasingRange>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
-  <Damage>k__BackingField: 1
   <GroundData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
     <BaseRotationDamping>k__BackingField: 1
@@ -36,6 +34,9 @@ MonoBehaviour:
     <Gold>k__BackingField: 10
     <Exp>k__BackingField: 5
     <DropItemDatas>k__BackingField:
-    - <Item>k__BackingField: {fileID: 11400000, guid: 9c9f2f1d551b56d49b2e4797e36a2e1d,
+    - <Item>k__BackingField: {fileID: 11400000, guid: 474cad03b3d58444d80bdc53c9c8fa38,
         type: 2}
       <DropRate>k__BackingField: 5
+  <StatData>k__BackingField:
+    <BaseAttack>k__BackingField: 3
+    <BaseDefense>k__BackingField: 0

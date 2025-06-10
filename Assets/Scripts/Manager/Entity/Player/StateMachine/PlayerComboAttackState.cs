@@ -32,7 +32,8 @@ public class PlayerComboAttackState : PlayerAttackState
             AIEnemy enemy = collider.GetComponent<AIEnemy>();
             if(enemy != null)
             {
-                enemy.TakeDamage(3);
+                int damage = (int)(PlayerManager.Instance.TotalAttack * attackInfoData.DamageMultiplier);
+                enemy.TakeDamage(damage);
             }
         }
     }

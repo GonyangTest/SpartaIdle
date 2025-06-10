@@ -28,6 +28,10 @@ public class ItemDataEditor : EditorWindow
     private int _health = 0;
     private int _mana = 0;
 
+    // Consumable
+    private float _coolTime = 0f;
+    private List<ConsumableEffect> _effects = new List<ConsumableEffect>();
+
     
     private Vector2 _scrollPosition;
     private List<GenericItemDataSO> _existingItems = new List<GenericItemDataSO>();
@@ -176,6 +180,11 @@ public class ItemDataEditor : EditorWindow
             GUILayout.Space(10);
             DrawArmorCreationPanel();
         }
+        else if (_itemType == ItemType.Consumable)
+        {
+            GUILayout.Space(10);
+            DrawConsumableCreationPanel();
+        }
     }
 
     // 무기 아이템 패널
@@ -194,6 +203,59 @@ public class ItemDataEditor : EditorWindow
         _defense = EditorGUILayout.IntField("Defense", _defense);
         _health = EditorGUILayout.IntField("Health", _health);
         _mana = EditorGUILayout.IntField("Mana", _mana);
+    }
+
+    public void DrawConsumableCreationPanel()
+    {
+        EditorGUILayout.LabelField("Consumable", EditorStyles.boldLabel);
+        _coolTime = EditorGUILayout.FloatField("Cool Time", _coolTime);
+        
+        GUILayout.Space(10);
+        
+        // 효과 목록
+        EditorGUILayout.LabelField("Effects", EditorStyles.boldLabel);
+        
+        if (_effects == null)
+            _effects = new List<ConsumableEffect>();
+        
+        for (int i = 0; i < _effects.Count; i++)
+        {
+            EditorGUILayout.BeginVertical("box");
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField($"Effect {i + 1}", EditorStyles.boldLabel);
+            
+            if (GUILayout.Button("Remove", GUILayout.Width(60)))
+            {
+                _effects.RemoveAt(i);
+                break;
+            }
+            EditorGUILayout.EndHorizontal();
+            
+            if (_effects[i] == null)
+                _effects[i] = new ConsumableEffect();
+            
+
+            EditorGUILayout.LabelField("Effect Info", EditorStyles.boldLabel);
+            _effects[i].EffectType = (EffectType)EditorGUILayout.EnumPopup("Effect Type", _effects[i].EffectType);
+            _effects[i].DurationType = (EffectDurationType)EditorGUILayout.EnumPopup("Duration Type", _effects[i].DurationType);
+            _effects[i].Value = EditorGUILayout.FloatField("Value", _effects[i].Value);
+            _effects[i].Duration = EditorGUILayout.FloatField("Duration", _effects[i].Duration);
+            _effects[i].IsPercentage = EditorGUILayout.Toggle("Is Percentage", _effects[i].IsPercentage);
+
+            GUILayout.Space(10);
+            EditorGUILayout.LabelField("Effect Display Info", EditorStyles.boldLabel);
+            _effects[i].EffectName = EditorGUILayout.TextField("Effect Name", _effects[i].EffectName);
+            _effects[i].Description = EditorGUILayout.TextField("Description", _effects[i].Description);
+            _effects[i].EffectIcon = (Sprite)EditorGUILayout.ObjectField("Effect Icon", _effects[i].EffectIcon, typeof(Sprite), false);
+            
+            EditorGUILayout.EndVertical();
+            GUILayout.Space(5);
+        }
+        
+        if (GUILayout.Button("Add Effect"))
+        {
+            _effects.Add(new ConsumableEffect());
+        }
     }
     
     // 아이템 목록 패널
@@ -296,12 +358,13 @@ public class ItemDataEditor : EditorWindow
             AssetDatabase.Refresh();
         }
         
-        // 새 아이템 데이터 생성
-        var newItem = ScriptableObject.CreateInstance<GenericItemDataSO>();
+        // 타입에 따른 적절한 ScriptableObject 생성
+        GenericItemDataSO newItem = CreateItemByType(_itemType);
         
         // ID 생성
         int newId = CreateAvailableID();
         
+        // 기본 정보 설정
         newItem.ItemID = newId;
         newItem.ItemName = _itemName;
         newItem.Type = _itemType;
@@ -313,6 +376,9 @@ public class ItemDataEditor : EditorWindow
         newItem.Price = _price;
         newItem.Description = _description;
         
+        // 타입별 속성 설정
+        SetItemTypeSpecificProperties(newItem);
+        
         // 파일명 생성
         string fileName = $"{_itemType}_{newId}.asset";
         string assetPath = Path.Combine(itemCreatePath, fileName);
@@ -322,12 +388,55 @@ public class ItemDataEditor : EditorWindow
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         
-        Debug.Log($"New Item Created: {_itemName} (ID: {newId})");
+        Debug.Log($"New Item Created: {_itemName} (ID: {newId}) - Type: {_itemType}");
         
         RefreshItemList(); // 목록 새로고침
 
         Selection.activeObject = newItem; // 생성된 아이템 선택
         EditorGUIUtility.PingObject(newItem); // Project 창에서 생성된 파일 깜빡임 효과
+    }
+    
+    private GenericItemDataSO CreateItemByType(ItemType itemType)
+    {
+        return itemType switch
+        {
+            ItemType.Weapon => ScriptableObject.CreateInstance<WeaponItemDataSO>(),
+            ItemType.Armor => ScriptableObject.CreateInstance<ArmorItemDataSO>(),
+            ItemType.Consumable => ScriptableObject.CreateInstance<ConsumableItemDataSO>(),
+            _ => ScriptableObject.CreateInstance<GenericItemDataSO>()
+        };
+    }
+    
+    private void SetItemTypeSpecificProperties(GenericItemDataSO item)
+    {
+        switch (item.Type)
+        {
+            case ItemType.Weapon:
+                if (item is WeaponItemDataSO weaponItem)
+                {
+                    weaponItem.Damage = _damage;
+                    weaponItem.CriticalChance = _criticalChance;
+                    weaponItem.CriticalDamage = _criticalDamage;
+                }
+                break;
+                
+            case ItemType.Armor:
+                if (item is ArmorItemDataSO armorItem)
+                {
+                    armorItem.Defense = _defense;
+                    armorItem.Health = _health;
+                    armorItem.Mana = _mana;
+                }
+                break;
+                
+            case ItemType.Consumable:
+                if (item is ConsumableItemDataSO consumableItem)
+                {
+                    consumableItem.coolTime = _coolTime;
+                    consumableItem.effects = new List<ConsumableEffect>(_effects);
+                }
+                break;
+        }
     }
     
     private void UpdateSelectedItem()
@@ -343,6 +452,9 @@ public class ItemDataEditor : EditorWindow
         _selectedItem.MaxStack = _maxStack;
         _selectedItem.Price = _price;
         _selectedItem.Description = _description;
+        
+        // 타입별 속성 업데이트
+        SetItemTypeSpecificProperties(_selectedItem);
         
         EditorUtility.SetDirty(_selectedItem);
         AssetDatabase.SaveAssets();
@@ -365,7 +477,62 @@ public class ItemDataEditor : EditorWindow
         _price = item.Price;
         _description = item.Description;
         
+        // 타입별 속성 로드
+        LoadItemTypeSpecificProperties(item);
+        
         Repaint();
+    }
+    
+    private void LoadItemTypeSpecificProperties(GenericItemDataSO item)
+    {
+        // 먼저 모든 값 초기화
+        ResetTypeSpecificProperties();
+        
+        switch (item.Type)
+        {
+            case ItemType.Weapon:
+                if (item is WeaponItemDataSO weaponItem)
+                {
+                    _damage = weaponItem.Damage;
+                    _criticalChance = weaponItem.CriticalChance;
+                    _criticalDamage = weaponItem.CriticalDamage;
+                }
+                break;
+                
+            case ItemType.Armor:
+                if (item is ArmorItemDataSO armorItem)
+                {
+                    _defense = armorItem.Defense;
+                    _health = armorItem.Health;
+                    _mana = armorItem.Mana;
+                }
+                break;
+                
+            case ItemType.Consumable:
+                if (item is ConsumableItemDataSO consumableItem)
+                {
+                    _coolTime = consumableItem.coolTime;
+                    _effects = new List<ConsumableEffect>(consumableItem.effects ?? new List<ConsumableEffect>());
+                }
+                break;
+        }
+    }
+    
+    private void ResetTypeSpecificProperties()
+    {
+        // Weapon
+        _damage = 0;
+        _criticalChance = 0;
+        _criticalDamage = 0;
+        
+        // Armor
+        _defense = 0;
+        _health = 0;
+        _mana = 0;
+        
+        // Consumable
+        _coolTime = 0f;
+        _effects = new List<ConsumableEffect>();
     }
     
     private void ClearSelection()
@@ -382,6 +549,9 @@ public class ItemDataEditor : EditorWindow
         _maxStack = 1;
         _price = 100;
         _description = "";
+        
+        // 타입별 속성 초기화
+        ResetTypeSpecificProperties();
         
         Repaint();
     }
@@ -410,12 +580,20 @@ public class ItemDataEditor : EditorWindow
     {
         _existingItems.Clear();
         
-        string[] guids = AssetDatabase.FindAssets("t:GenericItemDataSO"); // 모든 아이템 데이터 찾기
-        foreach (string guid in guids)
+        // 모든 아이템 타입의 ScriptableObject 검색
+        string[] weaponGuids = AssetDatabase.FindAssets("t:WeaponItemDataSO");
+        string[] armorGuids = AssetDatabase.FindAssets("t:ArmorItemDataSO");
+        string[] consumableGuids = AssetDatabase.FindAssets("t:ConsumableItemDataSO");
+        string[] genericGuids = AssetDatabase.FindAssets("t:GenericItemDataSO");
+        
+        // 모든 GUID 합치기
+        var allGuids = weaponGuids.Concat(armorGuids).Concat(consumableGuids).Concat(genericGuids);
+        
+        foreach (string guid in allGuids)
         {
-            string path = AssetDatabase.GUIDToAssetPath(guid); // 에셋 경로 가져오기
-            var item = AssetDatabase.LoadAssetAtPath<GenericItemDataSO>(path); // 에셋 로드
-            if (item != null && item.Type == _searchItemType)
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            var item = AssetDatabase.LoadAssetAtPath<GenericItemDataSO>(path);
+            if (item != null && item.Type == _searchItemType && !_existingItems.Contains(item))
             {
                 _existingItems.Add(item);
             }

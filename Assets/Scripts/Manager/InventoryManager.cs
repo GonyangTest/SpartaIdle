@@ -9,6 +9,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public ItemInstance _selectedItem;
 
+    public Action OnInventoryChanged;
+
     public void AddItem(ItemInstance item)
     {
         GenericItemDataSO itemData = ItemDatabase.Instance.GetItemByID(item.ItemID);
@@ -24,9 +26,21 @@ public class InventoryManager : Singleton<InventoryManager>
         }
 
         InventoryItems.Add( item);
+        OnInventoryChanged?.Invoke();
     }
 
-    public void RemoveItem(ItemInstance item) { InventoryItems.Remove(item); }
+    public void RemoveItem(ItemInstance item) { 
+        if(item.Quantity <= 1)
+        {
+            InventoryItems.Remove(item);
+        }
+        else
+        {
+            item.SubtractQuantity(1);
+        }
+
+        OnInventoryChanged?.Invoke();
+    }
 
     public void ClearInventory() { InventoryItems.Clear(); }
 
@@ -55,8 +69,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void UseSelectedItem()
     {
-        if(_selectedItem == null)
+        if(_selectedItem != null)
         {
+            _selectedItem.Use();
             RemoveItem(_selectedItem);
             return;
         }

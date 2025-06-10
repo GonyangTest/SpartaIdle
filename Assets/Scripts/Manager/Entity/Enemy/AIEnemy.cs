@@ -111,14 +111,12 @@ public class AIEnemy : MonoBehaviour, IDamageable
         // Gizmos.DrawWireSphere(transform.position, 1.0f);
     }
 
-    [ContextMenu("Test")]
-    public void Test()
+    public void TakeDamage(int amount)
     {
-        Health.TakeDamage(3);
-    }
+        int damage = amount - Data.StatData.BaseDefense;
+        if(damage < 0)
+            damage = 0;
 
-    public void TakeDamage(int damage)
-    {
         Health.TakeDamage(damage);
     }
 

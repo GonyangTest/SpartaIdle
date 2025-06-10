@@ -41,4 +41,10 @@ public class ItemInstance
     {
         return _quantity <= 0;
     }
+
+    public void Use()
+    {
+        GenericItemDataSO itemData = ItemDatabase.Instance.GetItemByID(_itemID);
+        itemData.Use();
+    }
 }

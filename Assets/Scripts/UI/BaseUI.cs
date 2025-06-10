@@ -9,7 +9,7 @@ public enum UIType
     Shop,
     Skill,
     Setting,
-    Result,
+    StageClear,
     GameOver,
     ToastMessage,
 }

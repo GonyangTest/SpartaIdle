@@ -25,6 +25,16 @@ public class InventoryUI : BaseWindow
        }
     }
 
+    private void OnEnable()
+    {
+        _inventoryManager.OnInventoryChanged += RefreshInventoryItemSlot;
+    }
+
+    private void OnDisable()
+    {
+        _inventoryManager.OnInventoryChanged -= RefreshInventoryItemSlot;
+    }
+
     private void RefreshInventoryItemSlot()
     {
         if(_inventoryManager == null)

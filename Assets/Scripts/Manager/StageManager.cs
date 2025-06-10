@@ -11,5 +11,10 @@ public class StageManager : Singleton<StageManager>
     {
         CurrentStage = 1;
     }
+
+    public void NextStage()
+    {
+        CurrentStage++;
+    }
     
 }

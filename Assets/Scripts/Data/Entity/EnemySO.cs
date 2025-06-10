@@ -48,12 +48,10 @@ public class EnemyHitData
 public class EnemySO : EntitySO
 {
     [field:SerializeField] public float PlayerChasingRange {get; private set;} = 10f;
-    [field:SerializeField] public float AttackRange {get; private set;} = 2f;
-    [field:SerializeField] public int Damage {get; private set;}
-
 
     [field:SerializeField] public EnemyGroundData GroundData {get; private set;}
     [field:SerializeField] public EnemyAttackData AttackData {get; private set;}
     [field:SerializeField] public EnemyHitData HitData {get; private set;}
     [field:SerializeField] public EnemyRewardData RewardData {get; private set;}
+    [field:SerializeField] public StatData StatData {get; private set;}
 }

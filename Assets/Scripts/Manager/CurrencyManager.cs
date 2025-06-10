@@ -9,6 +9,12 @@ public class CurrencyManager : Singleton<CurrencyManager>
 
     public int Gold { get; private set; }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        Gold = 1000;
+    }
+
     public void AddGold(int amount)
     {
         Gold += amount;

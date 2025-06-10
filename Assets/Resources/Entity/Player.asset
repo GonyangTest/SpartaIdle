@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8ac144bc81d7a4eba7d4b1e619e420, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  <EntityPrefab>k__BackingField: {fileID: 0}
   <HealthData>k__BackingField:
     <MaxHealth>k__BackingField: 100
+    <InvulnerabilityDuration>k__BackingField: 0
+  <StatData>k__BackingField:
+    <BaseAttack>k__BackingField: 100
+    <BaseDefense>k__BackingField: 10
   <GroundData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
     <BaseRotationDamping>k__BackingField: 1
