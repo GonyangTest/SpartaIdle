@@ -47,7 +47,31 @@ public class ItemDatabase : Singleton<ItemDatabase>
 
     public void LoadItemDatabase()
     {
-        _itemDatabase = new List<GenericItemDataSO>(Resources.LoadAll<GenericItemDataSO>("ScriptableObjects"));
+        _itemDatabase = new List<GenericItemDataSO>(Resources.LoadAll<GenericItemDataSO>("Item"));
+    }
+
+    public ItemInstance CreateItem(int itemID)
+    {
+        GenericItemDataSO itemDataSO = GetItemByID(itemID);
+        ItemInstance itemInstance = null;
+
+        switch(itemDataSO.Type)
+        {
+            case ItemType.Weapon:
+                itemInstance = new WeaponInstance(itemDataSO);
+                break;
+            case ItemType.Armor:
+                itemInstance = new ArmorInstance(itemDataSO);
+                break;
+            case ItemType.Consumable:
+                itemInstance = new ItemInstance(itemDataSO, 1);
+                break;
+            case ItemType.Resources:
+                itemInstance = new ItemInstance(itemDataSO, 1);
+                break;
+        }
+
+        return itemInstance;
     }
 
     public GameObject SpawnItem(Vector3 position, GenericItemDataSO itemDataSO)

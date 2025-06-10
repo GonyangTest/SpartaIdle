@@ -10,4 +10,9 @@ public class ArmorItemDataSO : GenericItemDataSO
     public int Defense;
     public int Health;
     public int Mana;
+
+    public override void Use()
+    {
+        Debug.Log("ArmorItemDataSO Use");
+    }
 }

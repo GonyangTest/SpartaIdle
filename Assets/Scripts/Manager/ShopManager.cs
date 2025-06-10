@@ -19,6 +19,10 @@ public class ShopManager : Singleton<ShopManager>
         if(CurrencyManager.Instance.Gold >= item.Price)
         {
             CurrencyManager.Instance.SubtractGold(item.Price);
+
+            ItemInstance newItem = ItemDatabase.Instance.CreateItem(item.ItemID);
+            InventoryManager.Instance.AddItem(newItem);
+
             Debug.Log($"BuyItem: {item.ItemName}");
         }
 

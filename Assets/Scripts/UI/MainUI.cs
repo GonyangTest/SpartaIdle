@@ -132,9 +132,13 @@ public class MainUI : BaseFixed
 
     public void OnClickInventoryButton()
     {
-        // if (_uiManager.IsUIActive(UIType.Inventory))
-        // {
-        //     _uiManager.CloseUI(UIType.Inventory);
-        // }
+        if (_uiManager.IsUIActive(UIType.Inventory))
+        {
+            _uiManager.CloseUI(UIType.Inventory);
+        }
+        else
+        {
+            _uiManager.OpenUI(UIType.Inventory);
+        }
     }
 }

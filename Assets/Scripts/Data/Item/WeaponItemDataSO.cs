@@ -12,4 +12,9 @@ public class WeaponItemDataSO : GenericItemDataSO
     public int CriticalDamage;
     public int AttackSpeed;
     public int AttackRange;
+
+    public override void Use()
+    {
+        Debug.Log("WeaponItemDataSO Use");
+    }
 }

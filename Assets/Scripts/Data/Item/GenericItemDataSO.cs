@@ -37,4 +37,6 @@ public class GenericItemDataSO : ScriptableObject
     {
         return (int)(Price * 0.5f);
     }
+
+    public virtual void Use() {}
 }

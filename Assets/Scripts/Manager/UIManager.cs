@@ -104,7 +104,8 @@ public class UIManager : Singleton<UIManager>
 
     public void CloseAllFixedUI()
     {
-        foreach (var fixedUI in _fixedUIList)
+        var fixedUIListCopy = _fixedUIList.ToList();
+        foreach (var fixedUI in fixedUIListCopy)
         {
             fixedUI.OnClose();
             _pool.ReturnUI(fixedUI.UIType, fixedUI);
@@ -149,6 +150,15 @@ public class UIManager : Singleton<UIManager>
             window.OnClose();
             _pool.ReturnUI(type, window);
             _activeWindows.Remove(type);
+        }
+    }
+
+    public void CloseAllWindows()
+    {
+        var windowKeys = _activeWindows.Keys.ToList();
+        foreach (var windowKey in windowKeys)
+        {
+            CloseWindow(windowKey);
         }
     }
 
