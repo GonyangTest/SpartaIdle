@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public event Action OnPlayerDataChanged;
-
     public PlayerManager PlayerManager;
     public CurrencyManager CurrencyManager;
     public StageManager StageManager;
@@ -63,18 +61,6 @@ public class GameManager : Singleton<GameManager>
         StageManager.EndStage(false);
     }
 
-    [ContextMenu("ExpTest")]
-    void ExpTest()
-    {
-        PlayerManager.AddExp(10);
-        OnPlayerDataChanged?.Invoke();
-    }
-
-    [ContextMenu("StageStartTest")]
-    void StageStartTest()
-    {
-        StageManager.StartStage(0);
-    }
 
     [ContextMenu("StageFailTest")]
     void StageFailTest()

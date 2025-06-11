@@ -48,9 +48,9 @@ public class PlayerBuffManager : Singleton<PlayerBuffManager>
 
     private void Update()
     {
-        // 초마다 업데이트
+        // 정해진 간격마다 업데이트
         _updateTime += Time.deltaTime;
-        if (_updateTime >= 1f)
+        if (_updateTime >= GameConstants.Buff.UPDATE_INTERVAL)
         {
             UpdateBuffs();
             _updateTime = 0f;

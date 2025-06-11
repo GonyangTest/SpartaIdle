@@ -433,7 +433,12 @@ public class ItemDataEditor : EditorWindow
                 if (item is ConsumableItemDataSO consumableItem)
                 {
                     consumableItem.coolTime = _coolTime;
-                    consumableItem.effects = new List<ConsumableEffect>(_effects);
+
+                    consumableItem.effects = new List<ConsumableEffect>();
+                    foreach (var effect in _effects)
+                    {
+                        consumableItem.effects.Add(effect?.Clone());
+                    }
                 }
                 break;
         }
@@ -512,7 +517,15 @@ public class ItemDataEditor : EditorWindow
                 if (item is ConsumableItemDataSO consumableItem)
                 {
                     _coolTime = consumableItem.coolTime;
-                    _effects = new List<ConsumableEffect>(consumableItem.effects ?? new List<ConsumableEffect>());
+                    
+                    _effects = new List<ConsumableEffect>();
+                    if (consumableItem.effects != null)
+                    {
+                        foreach (var effect in consumableItem.effects)
+                        {
+                            _effects.Add(effect?.Clone());
+                        }
+                    }
                 }
                 break;
         }

@@ -30,4 +30,31 @@ public class ConsumableEffect
     public string EffectName;             // 효과 이름
     public string Description;            // 효과 설명
     public Sprite EffectIcon;             // 효과 아이콘
+
+    // 기본 생성자
+    public ConsumableEffect()
+    {
+    }
+
+    // 깊은 복사를 위한 복사 생성자
+    public ConsumableEffect(ConsumableEffect original)
+    {
+        if (original != null)
+        {
+            EffectType = original.EffectType;
+            DurationType = original.DurationType;
+            Value = original.Value;
+            Duration = original.Duration;
+            IsPercentage = original.IsPercentage;
+            EffectName = original.EffectName;
+            Description = original.Description;
+            EffectIcon = original.EffectIcon;
+        }
+    }
+
+    // 깊은 복사 메서드
+    public ConsumableEffect Clone()
+    {
+        return new ConsumableEffect(this);
+    }
 } 

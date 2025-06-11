@@ -101,15 +101,6 @@ public class AIPlayer : MonoBehaviour, IDamageable
         Destroy(HealthBar);
     }
 
-    protected void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 10f);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1.0f);
-    }
-
     public void TakeDamage(int damage)
     {
         Health.TakeDamage(damage);

@@ -19,7 +19,7 @@ public class UIManager : Singleton<UIManager>
     protected override void Awake()
     {
         base.Awake();
-        _pool = new UIPool(transform, 1);
+        _pool = new UIPool(transform, GameConstants.UI.UI_MANAGER_POOL_SIZE);
     }
 
     // 카테고리에 따라 자동으로 적절한 UI 열기

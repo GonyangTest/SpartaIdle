@@ -47,7 +47,7 @@ public class ItemDatabase : Singleton<ItemDatabase>
 
     public void LoadItemDatabase()
     {
-        _itemDatabase = new List<GenericItemDataSO>(Resources.LoadAll<GenericItemDataSO>("Item"));
+        _itemDatabase = new List<GenericItemDataSO>(Resources.LoadAll<GenericItemDataSO>(ResourcePaths.Item.ITEM_DATABASE));
     }
 
     public ItemInstance CreateItem(int itemID)

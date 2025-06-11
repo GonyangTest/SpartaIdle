@@ -23,6 +23,7 @@ public class AIEnemy : MonoBehaviour, IDamageable
 
     private InventoryManager _inventoryManager;
     private CurrencyManager _currencyManager;
+    private PlayerManager _playerManager;
     private StageManager _stageManager;
 
     private void Awake()
@@ -133,6 +134,7 @@ public class AIEnemy : MonoBehaviour, IDamageable
     {
         if(_inventoryManager == null) _inventoryManager = InventoryManager.Instance;
         if(_currencyManager == null) _currencyManager = CurrencyManager.Instance;
+        if(_playerManager == null) _playerManager = PlayerManager.Instance;
         if(_stageManager == null) _stageManager = StageManager.Instance;
 
         stateMachine.ChangeState(stateMachine.DeadState);
@@ -156,7 +158,7 @@ public class AIEnemy : MonoBehaviour, IDamageable
 
         if(Data.RewardData.Exp > 0)
         {
-            _stageManager.AddExp(Data.RewardData.Exp);
+            _playerManager.AddExp(Data.RewardData.Exp);
         }
 
         _stageManager.OnEnemyDeath(this);

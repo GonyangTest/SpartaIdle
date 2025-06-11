@@ -62,11 +62,6 @@ public class PlayerBaseState : IState
         float deltaTime = currentTime - lastUpdateTime;
         updateFrameCount++;
         
-        // 매 10프레임마다 시간 간격 로그 출력 (너무 많은 로그 방지)
-        if (updateFrameCount % 10 == 0)
-        {
-            Debug.Log($"[{GetType().Name}] Update Delta: {deltaTime:F4}s, Frame: {Time.frameCount}, FPS: {1f/deltaTime:F1}");
-        }
         
         lastUpdateTime = currentTime;
 
@@ -123,7 +118,7 @@ public class PlayerBaseState : IState
     {
         if(_target != null)
         {
-            if(Vector3.Distance(stateMachine.player.transform.position, _target.transform.position) <= 1.0f)
+            if(Vector3.Distance(stateMachine.player.transform.position, _target.transform.position) <= GameConstants.Player.ATTACK_RANGE)
             {
                 stateMachine.IsAttacking = true;
                 return;

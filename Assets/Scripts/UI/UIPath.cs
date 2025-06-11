@@ -41,7 +41,7 @@ public static class UIPath
     
     private static void LoadConfig()
     {
-        config = Resources.Load<UIPathConfig>("UI/UIPathConfig");
+        config = Resources.Load<UIPathConfig>(ResourcePaths.UI.UI_PATH_CONFIG);
         if (config == null)
         {
             Debug.LogError("UIPathConfig is not found. Please create UIPathConfig.asset in ScriptableObject/UI folder.");

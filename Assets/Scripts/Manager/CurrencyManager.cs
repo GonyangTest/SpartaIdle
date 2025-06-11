@@ -12,7 +12,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
     protected override void Awake()
     {
         base.Awake();
-        Gold = 1000;
+        Gold = GameConstants.Currency.INITIAL_GOLD;
     }
 
     public void AddGold(int amount)

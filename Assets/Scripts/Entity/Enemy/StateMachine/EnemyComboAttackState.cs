@@ -80,7 +80,7 @@ public class EnemyComboAttackState : EnemyAttackState
     {
         if(alreadyAppliedCombo) return;
 
-    if(attackInfoData.ComboStateIndex == -1) return;
+            if(attackInfoData.ComboStateIndex == GameConstants.Animation.INVALID_COMBO_INDEX) return;
 
         if(!stateMachine.IsAttacking) return;
 

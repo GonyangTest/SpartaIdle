@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnAreaRect : MonoBehaviour
 {
     [Header("스폰 영역 설정")]
-    public Rect spawnArea = new Rect(-10, -10, 20, 20);
+    public Rect spawnArea = new Rect(GameConstants.Spawn.DEFAULT_SPAWN_AREA_X, GameConstants.Spawn.DEFAULT_SPAWN_AREA_Y, GameConstants.Spawn.DEFAULT_SPAWN_AREA_WIDTH, GameConstants.Spawn.DEFAULT_SPAWN_AREA_HEIGHT);
     public float spawnHeight = 0f;
     
     [Header("시각화")]

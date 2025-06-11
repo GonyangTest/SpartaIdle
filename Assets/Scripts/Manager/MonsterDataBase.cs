@@ -47,7 +47,7 @@ public class EnemyDatabase : Singleton<EnemyDatabase>
 
     public void LoadEnemyDatabase()
     {
-        _enemyDatabase = new List<EnemySO>(Resources.LoadAll<EnemySO>("Entity/Enemy"));
+        _enemyDatabase = new List<EnemySO>(Resources.LoadAll<EnemySO>(ResourcePaths.Entity.ENEMY_DATABASE));
     }
 
     public AIEnemy SpawnEnemy(Vector3 position, EnemySO enemyDataSO)

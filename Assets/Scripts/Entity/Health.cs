@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
     private int maxHealth;
     private int currentHealth;
 
-    private float invulnerabilityDuration = 1f;
+    private float invulnerabilityDuration = GameConstants.Health.INVULNERABILITY_DURATION;
     
     // 이벤트들
     public event Action<int, int> OnHealthChanged; // (현재HP, 최대HP)

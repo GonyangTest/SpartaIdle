@@ -20,9 +20,9 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         base.Awake();
 
-        Level = 1;
-        Exp = 0;
-        MaxExp = 100;
+        Level = GameConstants.Player.INITIAL_LEVEL;
+        Exp = GameConstants.Player.INITIAL_EXP;
+        MaxExp = GameConstants.Player.INITIAL_MAX_EXP;
     }
     
     protected void OnEnable()
@@ -41,7 +41,7 @@ public class PlayerManager : Singleton<PlayerManager>
         if (Exp >= MaxExp)
         {
             AddLevel();
-            Exp = 0;
+            Exp = GameConstants.Player.INITIAL_EXP;
         }
         
         StageManager.Instance.AddExp(amount);
@@ -61,8 +61,8 @@ public class PlayerManager : Singleton<PlayerManager>
     public void TakeDamage(int amount)
     {
         int damage = amount - TotalDefense;
-        if(damage < 0)
-            damage = 0;
+        if(damage < GameConstants.Player.MIN_DAMAGE)
+            damage = GameConstants.Player.MIN_DAMAGE;
 
         Player.Health.TakeDamage(damage);
     }

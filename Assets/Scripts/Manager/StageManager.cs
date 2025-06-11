@@ -46,7 +46,7 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
-    private float _checkInterval = 0.5f; // 0.5초마다 체크
+    private float _checkInterval = GameConstants.Stage.ENEMY_CHECK_INTERVAL; // 적 수 체크 간격
     private float _lastCheckTime = 0f;
 
     private void Update()
@@ -61,7 +61,7 @@ public class StageManager : Singleton<StageManager>
 
     private void LoadStageData()
     {
-        _stageDataSO = Resources.Load<StageDataSO>("Stage/StageData");
+        _stageDataSO = Resources.Load<StageDataSO>(ResourcePaths.Stage.STAGE_DATA);
     }
 
     public void StartStage(int stageNumber)
