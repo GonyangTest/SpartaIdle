@@ -10,6 +10,7 @@ public enum UIType
     Skill,
     Setting,
     StageClear,
+    StageFail,
     GameOver,
     ToastMessage,
 }

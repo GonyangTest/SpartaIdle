@@ -43,6 +43,5 @@ public class PlayerStateMachine : StateMachine
         DeathState = new PlayerDeathState(this);
 
         MovementSpeed = player.Data.GroundData.BaseSpeed;
-        RotateDamping = player.Data.GroundData.BaseRotationDamping;
     }
 }

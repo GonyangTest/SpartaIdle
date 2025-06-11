@@ -17,8 +17,8 @@ MonoBehaviour:
     <MaxHealth>k__BackingField: 100
     <InvulnerabilityDuration>k__BackingField: 0
   <StatData>k__BackingField:
-    <BaseAttack>k__BackingField: 100
-    <BaseDefense>k__BackingField: 10
+    <BaseAttack>k__BackingField: 10
+    <BaseDefense>k__BackingField: 0
   <GroundData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
     <BaseRotationDamping>k__BackingField: 1

@@ -15,8 +15,9 @@ MonoBehaviour:
   <EntityPrefab>k__BackingField: {fileID: 4462574753847856639, guid: f948d1ed4e6da214c8021e2a72592570,
     type: 3}
   <HealthData>k__BackingField:
-    <MaxHealth>k__BackingField: 10
+    <MaxHealth>k__BackingField: 30
     <InvulnerabilityDuration>k__BackingField: 0
+  <EnemyID>k__BackingField: 1
   <PlayerChasingRange>k__BackingField: 10
   <GroundData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
@@ -36,7 +37,7 @@ MonoBehaviour:
     <DropItemDatas>k__BackingField:
     - <Item>k__BackingField: {fileID: 11400000, guid: 474cad03b3d58444d80bdc53c9c8fa38,
         type: 2}
-      <DropRate>k__BackingField: 5
+      <DropRate>k__BackingField: 70
   <StatData>k__BackingField:
     <BaseAttack>k__BackingField: 3
     <BaseDefense>k__BackingField: 0

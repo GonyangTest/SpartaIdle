@@ -21,6 +21,10 @@ public class AIEnemy : MonoBehaviour, IDamageable
     public Animator Animator {get; private set;}
     public CharacterController Controller {get; private set;}
 
+    private InventoryManager _inventoryManager;
+    private CurrencyManager _currencyManager;
+    private StageManager _stageManager;
+
     private void Awake()
     {
         AnimationData.Initialize();
@@ -52,6 +56,11 @@ public class AIEnemy : MonoBehaviour, IDamageable
         NavMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
 
         stateMachine.ChangeState(stateMachine.IdleState);
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
     }
 
     public bool SetDestination(Vector3 destination)
@@ -122,6 +131,10 @@ public class AIEnemy : MonoBehaviour, IDamageable
 
     public void Death()
     {
+        if(_inventoryManager == null) _inventoryManager = InventoryManager.Instance;
+        if(_currencyManager == null) _currencyManager = CurrencyManager.Instance;
+        if(_stageManager == null) _stageManager = StageManager.Instance;
+
         stateMachine.ChangeState(stateMachine.DeadState);
 
         if(Data.RewardData.DropItemDatas.Count > 0)
@@ -131,19 +144,21 @@ public class AIEnemy : MonoBehaviour, IDamageable
                 int random = Random.Range(0, 100);
                 if(random < itemData.DropRate)
                 {
-                    InventoryManager.Instance.AddItem(new ItemInstance(itemData.Item, 1));
+                    _inventoryManager.AddItemReward(new ItemInstance(itemData.Item, 1));
                 }
             }
         }
 
         if(Data.RewardData.Gold > 0)
         {
-            CurrencyManager.Instance.AddGold(Data.RewardData.Gold);
+            _currencyManager.AddGold(Data.RewardData.Gold);
         }
 
         if(Data.RewardData.Exp > 0)
         {
-            PlayerManager.Instance.AddExp(Data.RewardData.Exp);
-        }   
+            _stageManager.AddExp(Data.RewardData.Exp);
+        }
+
+        _stageManager.OnEnemyDeath(this);
     }
 }

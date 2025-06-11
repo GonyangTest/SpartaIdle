@@ -18,6 +18,7 @@ public class MainUI : BaseFixed
     
     [Header("Stage Info")]
     [SerializeField] private TextMeshProUGUI _stageText;
+    [SerializeField] private TextMeshProUGUI _enemyCountText;
 
     [Header("Shop Info")]
     [SerializeField] private Button _shopButton;
@@ -47,7 +48,8 @@ public class MainUI : BaseFixed
         {
             _playerManager.OnPlayerInfoDataChanged += UpdatePlayerInfo;
             _currencyManager.OnGoldDataChanged += UpdateGold;
-            _gameManager.OnStageDataChanged += UpdateStageInfo;
+            _stageManager.OnStageDataChanged += UpdateStageInfo;
+            _stageManager.OnEnemyCountChanged += UpdateEnemyCount;
         }
 
         RefreshAllUI();
@@ -67,7 +69,8 @@ public class MainUI : BaseFixed
         {
             _playerManager.OnPlayerInfoDataChanged -= UpdatePlayerInfo;
             _currencyManager.OnGoldDataChanged -= UpdateGold;
-            _gameManager.OnStageDataChanged -= UpdateStageInfo;
+            _stageManager.OnStageDataChanged -= UpdateStageInfo;
+            _stageManager.OnEnemyCountChanged -= UpdateEnemyCount;
         }
     }
 
@@ -98,6 +101,18 @@ public class MainUI : BaseFixed
 
         if (_stageText != null)
             _stageText.text = $"Stage: {_stageManager.CurrentStage}";
+
+        int totalEnemyCount = _stageManager.GetTotalEnemyCount();
+            
+        UpdateEnemyCount(totalEnemyCount, totalEnemyCount);
+    }
+    
+    private void UpdateEnemyCount(int activeEnemies, int totalEnemies)
+    {
+        if (_stageManager != null && _enemyCountText != null)
+        {
+            _enemyCountText.text = $"({activeEnemies}/{totalEnemies})";
+        }
     }
 
     public void UpdateGold(int gold)

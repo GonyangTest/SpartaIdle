@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerManager : Singleton<PlayerManager>
 {
     public AIPlayer Player;
+    [SerializeField] private Transform _initPlayerTransform;
 
     public event Action<int, int, int> OnPlayerInfoDataChanged;
 
@@ -43,6 +44,7 @@ public class PlayerManager : Singleton<PlayerManager>
             Exp = 0;
         }
         
+        StageManager.Instance.AddExp(amount);
         OnPlayerInfoDataChanged?.Invoke(MaxExp, Exp, Level);
     }
 
@@ -69,5 +71,13 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         TotalAttack = Player.Data.StatData.BaseAttack + buffBonus.AttackBonus;
         TotalDefense = Player.Data.StatData.BaseDefense + buffBonus.DefenseBonus;
+    }
+
+    public void ResetPlayerTransform()
+    {
+        Player.NavMeshAgent.Warp(_initPlayerTransform.position);
+        Player.NavMeshAgent.SetDestination(Player.Target.position);
+        Player.Health.Heal(Player.Health.MaxHealth);
+        // Player.transform.position = _initPlayerTransform.position;
     }
 }

@@ -6,13 +6,13 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public event Action OnPlayerDataChanged;
-    public event Action OnGoldDataChanged;
-    public event Action OnStageDataChanged;
 
     public PlayerManager PlayerManager;
     public CurrencyManager CurrencyManager;
     public StageManager StageManager;
 
+    
+    
     UIManager _uiManager;
 
     protected override void Awake()
@@ -29,41 +29,31 @@ public class GameManager : Singleton<GameManager>
         _uiManager = UIManager.Instance;
         GameStart();
     }
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
 
-        }
+    public void RestartStage()
+    {
+        ResetPlayerTransform();
+        _uiManager.CloseAllWindows();
+        StageManager.StartStage(StageManager.CurrentStage);
+    }
+
+    public void NextStage()
+    {
+        ResetPlayerTransform();
+        _uiManager.CloseAllWindows();
+        StageManager.StartStage(StageManager.CurrentStage + 1);
     }
 
     void GameStart()
     {
         _uiManager.OpenUI(UIType.Main);
+
+        StageManager.StartStage(1);
     }
 
     void GameOver()
     {
-        Debug.Log("Game Over!");
-    }
-
-    private void StageClear(int stage)
-    {
-        // StageManager.NextStage();
-        // _uiManager.OpenUI(UIType.StageClear, new OpenParam(stage));
-    }
-
-    [ContextMenu("Test")]
-    void Test()
-    {
-        PlayerManager.AddExp(100);
-        CurrencyManager.AddGold(100);
-        StageManager.StartStage();
-        
-        OnPlayerDataChanged?.Invoke();
-        OnGoldDataChanged?.Invoke();
-        OnStageDataChanged?.Invoke();
+        StageManager.EndStage(false);
     }
 
     [ContextMenu("ExpTest")]
@@ -71,5 +61,28 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerManager.AddExp(10);
         OnPlayerDataChanged?.Invoke();
+    }
+
+    [ContextMenu("StageStartTest")]
+    void StageStartTest()
+    {
+        StageManager.StartStage(0);
+    }
+
+    [ContextMenu("StageFailTest")]
+    void StageFailTest()
+    {
+        StageManager.EndStage(false);
+    }
+
+    [ContextMenu("StageClearTest")]
+    void StageClearTest()
+    {
+        StageManager.EndStage(true);
+    }
+
+    public void ResetPlayerTransform()
+    {
+        PlayerManager.ResetPlayerTransform();
     }
 }

@@ -46,6 +46,5 @@ public class EnemyStateMachine : StateMachine
         ComboAttackState = new EnemyComboAttackState(this);
 
         MovementSpeed = enemy.Data.GroundData.BaseSpeed;
-        RotateDamping = enemy.Data.GroundData.BaseRotationDamping;
     }
 }

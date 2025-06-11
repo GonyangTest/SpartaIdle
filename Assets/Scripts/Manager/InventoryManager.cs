@@ -76,4 +76,10 @@ public class InventoryManager : Singleton<InventoryManager>
             return;
         }
     }
+
+    public void AddItemReward(ItemInstance item)
+    {
+        AddItem(item);
+        StageManager.Instance.AddItemReward(item);
+    }
 }

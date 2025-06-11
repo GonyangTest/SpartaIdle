@@ -40,7 +40,6 @@ public class PlayerBuffManager : Singleton<PlayerBuffManager>
     private float _updateTime = 0f;
     
     // 이벤트
-    public event Action<Buff> OnBuffAdded;
     public event Action<Buff> OnBuffRemoved;
     public event Action<BuffBonus> OnStatsChanged;
     public event Action<List<Buff>> OnBuffDisplayUpdated;

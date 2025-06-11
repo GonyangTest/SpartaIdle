@@ -92,16 +92,27 @@ public class PlayerBaseState : IState
 
     protected void GetEnemyInChasingRange()
     {
+        float minDistance = float.MaxValue;
         LayerMask enemyLayer = LayerMask.GetMask("Enemy");
+        GameObject nearestEnemy = null;
         Collider[] colliders = Physics.OverlapSphere(stateMachine.player.transform.position, 10f, enemyLayer);
         foreach(Collider collider in colliders)
         {
-            if(collider.gameObject.GetComponent<AIEnemy>().Health.IsAlive)
+            // 제일 가까이 있는 적 
+            float distance = Vector3.Distance(stateMachine.player.transform.position, collider.gameObject.transform.position);
+            if(distance < minDistance)
             {
-                _target = collider.gameObject;
-                Debug.Log($"[GetEnemyInChasingRange] Enemy 발견: {_target.name}");
-                return;
+                minDistance = distance;
+                nearestEnemy = collider.gameObject;
             }
+
+        }
+
+        if(nearestEnemy != null && nearestEnemy.GetComponent<AIEnemy>().Health.IsAlive)
+        {
+            _target = nearestEnemy;
+            Debug.Log($"[GetEnemyInChasingRange] Enemy 발견: {_target.name}");
+            return;
         }
 
         _target = null;

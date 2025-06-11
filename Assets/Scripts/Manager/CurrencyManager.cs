@@ -18,6 +18,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public void AddGold(int amount)
     {
         Gold += amount;
+        StageManager.Instance.AddGold(amount);
         OnGoldDataChanged?.Invoke(Gold);
     }
 

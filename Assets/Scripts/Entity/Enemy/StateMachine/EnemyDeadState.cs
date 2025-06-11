@@ -66,6 +66,9 @@ public class EnemyDeadState : EnemyBaseState
         // 시간이 다 되면 GameObject 파괴
         if (currentTimer <= 0f)
         {
+            // StageManager에 적 사망 알림
+            StageManager.Instance.OnEnemyDeath(stateMachine.enemy);
+            
             Object.Destroy(stateMachine.enemy.gameObject);
         }
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Consumable_50001
   m_EditorClassIdentifier: 
   ItemID: 50001
-  ItemName: "\uAC15\uD654\uD3EC\uC158 (Copy)"
+  ItemName: "\uAC15\uD654\uD3EC\uC158"
   Type: 2
   Rarity: 0
   Icon: {fileID: 21300000, guid: a6c6fab44f08dca4a9589c05080907fb, type: 3}

@@ -22,7 +22,6 @@ public class EnemyRewardData
 public class EnemyGroundData
 {
     [field:SerializeField][field:Range(0f, 25f)] public float BaseSpeed {get; private set;} = 5f;
-    [field:SerializeField][field:Range(0f, 25f)] public float BaseRotationDamping {get; private set;} = 1f;
 
 
     [field:Header("RunData")]
@@ -47,6 +46,7 @@ public class EnemyHitData
 [CreateAssetMenu(fileName = "Enemy", menuName = "ScriptableObject/Enemy")]
 public class EnemySO : EntitySO
 {
+    [field:SerializeField] public int EnemyID {get; private set;}
     [field:SerializeField] public float PlayerChasingRange {get; private set;} = 10f;
 
     [field:SerializeField] public EnemyGroundData GroundData {get; private set;}

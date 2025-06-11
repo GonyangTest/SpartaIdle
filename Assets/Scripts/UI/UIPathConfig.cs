@@ -5,14 +5,13 @@ using System.Collections.Generic;
 public class UIPathConfig : ScriptableObject
 {
     [SerializeField] private List<UIPathData> _uiPaths = new List<UIPathData>();
-    
     private Dictionary<UIType, UIPathData> _pathCache;
     
     void OnEnable()
     {
         RefreshCache();
     }
-    
+
     public void RefreshCache()
     {
         _pathCache = new Dictionary<UIType, UIPathData>();

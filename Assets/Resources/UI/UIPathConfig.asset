@@ -25,3 +25,7 @@ MonoBehaviour:
     _uiType: 1
     _path: UI/WindowUI/InventoryWindow
     _isEnabled: 1
+  - _category: 1
+    _uiType: 5
+    _path: UI/WindowUI/StageClearWindow
+    _isEnabled: 1

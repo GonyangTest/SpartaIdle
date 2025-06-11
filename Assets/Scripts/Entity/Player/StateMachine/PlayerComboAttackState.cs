@@ -26,7 +26,7 @@ public class PlayerComboAttackState : PlayerAttackState
         stateMachine.player.Animator.SetInteger("Combo", comboIndex);
 
         // 임시
-        Collider[] colliders = Physics.OverlapSphere(stateMachine.player.transform.position, 10f, LayerMask.GetMask("Enemy"));
+        Collider[] colliders = Physics.OverlapSphere(stateMachine.player.transform.position, 1f, LayerMask.GetMask("Enemy"));
         foreach(Collider collider in colliders)
         {
             AIEnemy enemy = collider.GetComponent<AIEnemy>();
