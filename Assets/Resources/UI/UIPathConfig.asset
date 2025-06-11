@@ -16,16 +16,20 @@ MonoBehaviour:
   - _category: 0
     _uiType: 0
     _path: UI/FixedUI/Main
-    _isEnabled: 1
+    _isUse: 1
   - _category: 1
     _uiType: 2
     _path: UI/WindowUI/ShopWindow
-    _isEnabled: 1
+    _isUse: 1
   - _category: 1
     _uiType: 1
     _path: UI/WindowUI/InventoryWindow
-    _isEnabled: 1
+    _isUse: 1
   - _category: 1
     _uiType: 5
     _path: UI/WindowUI/StageClearWindow
-    _isEnabled: 1
+    _isUse: 1
+  - _category: 1
+    _uiType: 6
+    _path: UI/WindowUI/StageFailWindow
+    _isUse: 1

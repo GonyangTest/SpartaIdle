@@ -30,6 +30,13 @@ public class GameManager : Singleton<GameManager>
         GameStart();
     }
 
+    public void PreviousStage()
+    {
+        ResetPlayerTransform();
+        _uiManager.CloseAllWindows();
+        StageManager.StartStage(StageManager.CurrentStage - 1);
+    }
+
     public void RestartStage()
     {
         ResetPlayerTransform();

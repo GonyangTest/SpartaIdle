@@ -10,7 +10,7 @@ public class StageManager : Singleton<StageManager>
     [SerializeField] private List<SpawnAreaRect> _spawnAreaRects = new List<SpawnAreaRect>();
     public int CurrentStage { get; private set; }
 
-    private StageClearParam _stageClearParam;
+    private StageParam _stageClearParam;
     private float _startTime;
     private bool _progressing = false;
     private AIPlayer _player;
@@ -67,7 +67,7 @@ public class StageManager : Singleton<StageManager>
     public void StartStage(int stageNumber)
     {
         CurrentStage = stageNumber;
-        _stageClearParam = new StageClearParam(CurrentStage);
+        _stageClearParam = new StageParam(CurrentStage);
         _startTime = Time.time;
 
         _stageClearParam.ExpGained = 0;
@@ -101,7 +101,7 @@ public class StageManager : Singleton<StageManager>
     {
         if(!_progressing) return;
 
-        _stageClearParam.ClearTime = TimeFormatter.ToHourMinuteSecondFormat(Time.time - _startTime);
+        _stageClearParam.ElapsedTime = TimeFormatter.ToHourMinuteSecondFormat(Time.time - _startTime);
 
         if(isClear)
         {
@@ -141,6 +141,7 @@ public class StageManager : Singleton<StageManager>
         }
 
         OnEnemyCountChanged?.Invoke(_activeEnemies.Count, _totalEnemyCount);
+        _stageClearParam.RemainEnemyCount = _activeEnemies.Count;
     }
 
     public int GetActiveEnemyCount()

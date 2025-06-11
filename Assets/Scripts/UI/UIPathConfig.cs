@@ -17,7 +17,7 @@ public class UIPathConfig : ScriptableObject
         _pathCache = new Dictionary<UIType, UIPathData>();
         foreach (var pathData in _uiPaths)
         {
-            if (pathData.IsEnabled && !_pathCache.ContainsKey(pathData.UiType))
+            if (pathData.IsUsed && !_pathCache.ContainsKey(pathData.UiType))
             {
                 _pathCache[pathData.UiType] = pathData;
             }

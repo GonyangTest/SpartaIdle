@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class StageClearUI : BaseWindow
 {
-    private StageClearParam _stageClearParam;
+    private StageParam _stageClearParam;
 
     public TextMeshProUGUI _stageNumberText;
     public TextMeshProUGUI _clearTimeText;
@@ -31,10 +31,10 @@ public class StageClearUI : BaseWindow
     {
         base.OnOpen(param);
 
-        _stageClearParam = param as StageClearParam;
+        _stageClearParam = param as StageParam;
 
         _stageNumberText.text = $"{_stageClearParam.StageNumber} 스테이지 클리어";
-        _clearTimeText.text = _stageClearParam.ClearTime;
+        _clearTimeText.text = _stageClearParam.ElapsedTime;
         _expText.text = _stageClearParam.ExpGained.ToString();
         _goldText.text = _stageClearParam.GoldGained.ToString();
 

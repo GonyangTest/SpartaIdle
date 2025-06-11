@@ -24,3 +24,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}
     - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}
     - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}
+  - StageNumber: 3
+    Enemies:
+    - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}
+    - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}
+    - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}
+    - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}
+    - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}
+    - {fileID: 11400000, guid: d97e60a2e46e13b42b9ff6a1847b37f6, type: 2}

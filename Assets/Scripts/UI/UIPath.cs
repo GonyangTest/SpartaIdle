@@ -8,7 +8,7 @@ public class UIPathData
     [SerializeField] private UICategory _category;
     [SerializeField] private UIType _uiType;
     [SerializeField] private string _path;
-    [SerializeField] private bool _isEnabled = true;
+    [SerializeField] private bool _isUse = true;
     
     public UIPathData(UIType type, string resourcePath, UICategory uiCategory)
     {
@@ -20,7 +20,7 @@ public class UIPathData
     public UICategory Category => _category;
     public UIType UiType => _uiType;
     public string Path => _path;
-    public bool IsEnabled => _isEnabled;
+    public bool IsUsed => _isUse;
 }
 
 public enum UICategory
