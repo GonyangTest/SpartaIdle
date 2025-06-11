@@ -9,7 +9,7 @@ public class ObjectPool<T> where T : MonoBehaviour
     private readonly List<T> _activeObjects;
     private readonly int _poolSize;
 
-    public ObjectPool(T prefab, Transform parent = null, int poolSize = 10)
+    public ObjectPool(T prefab, Transform parent = null, int poolSize = GameConstants.UI.DEFAULT_POOL_SIZE)
     {
         _prefab = prefab;
         _parent = parent;

@@ -8,7 +8,7 @@ public class UIPool
     private readonly Transform _parent;
     private readonly int _poolSize;
 
-    public UIPool(Transform parent = null, int poolSize = 10)
+    public UIPool(Transform parent = null, int poolSize = GameConstants.UI.DEFAULT_POOL_SIZE)
     {
         _parent = parent;
         _poolSize = poolSize;

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97291c64078aa2f4ca29b83d6e768760, type: 3}
+  m_Name: Enemy1
+  m_EditorClassIdentifier: 
+  <EntityPrefab>k__BackingField: {fileID: 4462574753847856639, guid: f948d1ed4e6da214c8021e2a72592570,
+    type: 3}
+  <HealthData>k__BackingField:
+    <MaxHealth>k__BackingField: 30
+    <InvulnerabilityDuration>k__BackingField: 0
+  <EnemyID>k__BackingField: 1
+  <PlayerChasingRange>k__BackingField: 10
+  <GroundData>k__BackingField:
+    <BaseSpeed>k__BackingField: 5
+    <BaseRotationDamping>k__BackingField: 1
+    <RunSpeedModifier>k__BackingField: 1
+  <AttackData>k__BackingField:
+    <AttackInfoDatas>k__BackingField:
+    - <AttackName>k__BackingField: Attack
+      <ComboStateIndex>k__BackingField: -1
+      <ComboTransitionTime>k__BackingField: 0.8
+      <DamageMultiplier>k__BackingField: 1
+  <HitData>k__BackingField:
+    <HitStunDuration>k__BackingField: 0.5
+  <RewardData>k__BackingField:
+    <Gold>k__BackingField: 10
+    <Exp>k__BackingField: 5
+    <DropItemDatas>k__BackingField:
+    - <Item>k__BackingField: {fileID: 11400000, guid: 474cad03b3d58444d80bdc53c9c8fa38,
+        type: 2}
+      <DropRate>k__BackingField: 70
+  <StatData>k__BackingField:
+    <BaseAttack>k__BackingField: 3
+    <BaseDefense>k__BackingField: 0
